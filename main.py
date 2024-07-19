@@ -1,6 +1,7 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 from graph_generator import generate_fb_friends
+from algorithm import dijkstra
 
 
 def main():
@@ -24,10 +25,12 @@ def main():
     print(shortest_path)
 
     # Dijkstra
-    print(f"Dijkstra {main_account_name} and '{friend_for_search}':")
-    dijkstra_result = nx.single_source_dijkstra_path(fb_friends, main_account_name, cutoff=None, weight='weight')
-    print(dijkstra_result[friend_for_search])
+    dijkstra_result = nx.single_source_dijkstra_path_length(fb_friends, main_account_name, cutoff=None, weight='weight')
+    print(f"Dijkstra {main_account_name} and '{friend_for_search}': {dijkstra_result[friend_for_search]}")
 
+    # Manual Dijkstra
+    dijkstra_manual_result = dijkstra(fb_friends, main_account_name)
+    print(f"Manual Dijkstra {main_account_name} and '{friend_for_search}': {dijkstra_manual_result[friend_for_search]}")
 
     # DFS
     dfs_tree = nx.dfs_tree(fb_friends, source=main_account_name)
