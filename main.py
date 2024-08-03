@@ -1,7 +1,7 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 from graph_generator import generate_fb_friends
-from algorithm import dijkstra
+from algorithm import dijkstra, dfs, bfs
 
 
 def main():
@@ -34,12 +34,24 @@ def main():
 
     # DFS
     dfs_tree = nx.dfs_tree(fb_friends, source=main_account_name)
+    print("\nDFS")
     print(list(dfs_tree.edges()))
     print(list(dfs_tree.nodes()))
     # BFS
     bfs_tree = nx.bfs_tree(fb_friends, source=main_account_name)
+    print("\nBFS")
     print(list(bfs_tree.edges()))
     print(list(bfs_tree.nodes()))
+
+    # dfs manual
+    dfs_manual = dfs(fb_friends, main_account_name)
+    print("\nDFS manual")
+    print(dfs_manual)
+
+    # bfs manual
+    bfs_manual = bfs(fb_friends, main_account_name)
+    print("\nBFS manual")
+    print(bfs_manual)
 
 
 if __name__ == '__main__':
